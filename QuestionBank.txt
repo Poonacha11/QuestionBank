@@ -1,0 +1,73 @@
+package programmingclass;
+
+import java.util.ArrayList;
+
+public class QuestionBank {
+	int qid;
+	String qdes;
+	int[] ayear;
+	String concepts;
+	QuestionBank(){}
+	public QuestionBank(int qid, String qdes, int[] ayear, String concepts) {
+		super();
+		this.qid = qid;
+		this.qdes = qdes;
+		this.ayear = ayear;
+		this.concepts = concepts;
+	}
+	void display()
+	{
+		System.out.println("Id: "+qid);
+		System.out.println("Question Descriptipn: "+qdes);
+		System.out.print("Academic Year: ");
+		for(int i=0;i<ayear.length;i++)
+		{
+			System.out.print(ayear[i]+" ");
+		}
+		System.out.println();
+		System.out.println("Concepts: "+concepts);
+		System.out.println("============================================");
+	}
+	
+	//To retrieve the questions for a given year
+	static ArrayList rQue(int year, QuestionBank[] qb1)
+	{
+		ArrayList<String> al=new ArrayList<>();
+		for(int i=0;i<qb1.length;i++)
+		{
+			for(int j=0;j<qb1[i].ayear.length;j++)
+			{
+				if(qb1[i].ayear[j]==year)
+				{
+					al.add(qb1[i].qdes);
+				}
+			}
+		}
+		return al;
+	}
+	
+    //To retrieve the concepts having maximum questions
+	String rmaxq(QuestionBank[] qb1)
+	{
+		String str="";
+		int temp=0;
+		for (int i=0;i<qb1.length;i++)
+		{
+			int count=0;
+			for(int j=i;j<qb1.length-1;j++)
+			{
+				if(qb1[i].concepts==qb1[i+1].concepts)
+				{
+					count++;
+				}	
+			}
+			if(count>=temp)
+			{
+				str=qb1[i].concepts;
+			}
+			temp=count;
+		}
+		return str;
+		
+	}
+ }
